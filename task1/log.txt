@@ -1,0 +1,12 @@
+$ git log
+commit b78964edd9a2b377e00f4a20547fef9c1ba26f58
+Author: Ann Akulich <an12.na98@gmail.com>
+Date:   Tue Feb 7 21:20:29 2017 +0300
+
+    add /c/up/task1/status.txt
+
+commit dd9718b926747839a8df31c4ae972d23f24b366e
+Author: Ann Akulich <an12.na98@gmail.com>
+Date:   Tue Feb 7 21:10:28 2017 +0300
+
+    add .gitignore
