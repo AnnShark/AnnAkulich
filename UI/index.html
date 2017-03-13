@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>News portal</title>
+    <script src ="articles.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 <header>
     <div class="user">
-        <div class="name"><p>Ann Akulich</p></div>
+        <div class="name"><p>Гость</p></div>
 
     </div>
     <hgroup>
@@ -16,90 +17,38 @@
         <h2>Актуальные новости</h2>
     </hgroup>
     <nav class="global">
-        <ul>
-            <li><a href=#>Главная</a></li>
-            <li><a href=#>Добавить/Редактировать новость</a></li>
-            <li><a href=#>Выйти</a></li>
+        <ul class = "buttons">
+            <li class = "buttons"><a href=#>Главная</a></li>
+            <li class = "buttons"><a href=#>Добавить/Редактировать новость</a></li>
+            <li class = "buttons"><a class="login"href=#>Выйти</a></li>
         </ul>
     </nav>
 </header>
 <div class="clearfix">
     <div class="content">
-        <article>
-            <header>
-                <h2>Лайфхаки для каждого. Как экономить на интернет-покупках, не дожидаясь "черной пятницы"</h2>
-                <div class="date">28 февраля 2017 в 8:00</div>
-                <footer>
-                    <span>Автор: </span><strong>Ann Akulich</strong>
-                    <span class="newLine">
-                        Теги:
-                        <a class="tags" href=#>лайфхаки</a>
-                        <a class="tags" href=#>экономить</a>
-                        <a class="tags" href=#>черная пятница</a>
-                    </span>
-                </footer>
-            </header>
-            <p>Интернет-шопинг становится все популярнее у белорусов. За прошлый год расходы на онлайн-покупки выросли на четверть. Не выходя из дома белорусы покупают практически все: от косметики и парфюмерии до стройматериалов. Чтобы сделать онлайн-шопинг еще более выгодным, мы подготовили несколько простых советов.&hellip;
-            </p>
-            <div><a class="button" href=#>Подробнее</a></div>
-        </article>
-        <article>
-            <header>
-                <h2>"Оскар-2017": лучший фильм — "Лунный свет". "Ла-Ла Ленд" объявили победителем ошибочно</h2>
-                <div class="date">27 февраля 2017 в 3:03</div>
-                <footer>
-                    <span>Автор: </span><strong>Ann Akulich</strong>
-                    <span class="newLine">
-                        Теги:
-                        <a class="tags" href=#>Оскар</a>
-                        <a class="tags" href=#>Лунный свет</a>
-                        <a class="tags" href=#>Ла-Ла Ленд</a>
-                    </span>
-                </footer>
-            </header>
-            <p>На конфузе в Лос-Анджелесе завершилась 89-я церемония награждения ежегодной премии «Оскар». Лучшим фильмом стал «Лунный свет», приз в номинации «Лучшая актриса» — за Эммой Стоун. Конфуз в том, что сперва академики вскрыли ошибочный конверт с названием «Ла-Ла Ленд».&hellip;
-            </p>
-            <a class="button" href=#>Подробнее</a>
-        </article>
-        <article>
-            <header>
-                <h2>"Газпром" повысит стоимость газа для Евросоюза</h2>
-                <div class="date">28 февраля 2017 в 9:40</div>
-                <footer>
-                    <span>Автор: </span><strong>Ann Akulich</strong>
-                    <span class="newLine">Теги:
-                        <a class="tags" href=#>Газпром</a>
-                        <a class="tags" href=#>газ</a>
-                        <a class="tags" href=#>Евросоюз</a>
-                    </span>
-                </footer>
-            </header>
-            <p>Экспортная стоимость газа для Евросоюза в текущем году может составить 180−190 долларов за тысячу кубометров. Об этом сообщил заместитель председателя правления «Газпрома» Александр Медведев, передает РИА "Новости".&hellip;
-            </p>
-            <a class="button" href=#>Подробнее</a>
-        </article>
+
     </div>
     <aside>
         <h2>Фильтры</h2>
-        <section class="dateFilter">
+        <section class="date-filter">
             <h3>Дата публикации</h3>
             <span>c<input type="date"></span>
             <span>по<input type="date"></span>
         </section>
-        <section class="authorNameFilter">
+        <section class="author-name-filter">
             <h3>Имя автора</h3>
             <span><input placeholder="Введите имя автора"></span>
-            <a class="smallButton" href=#>Добавить</a>
+            <a class="small-button" href=#>Добавить</a>
         </section>
         <section class="tagsFilter">
             <h3>Теги</h3>
             <span><input placeholder="Введите тег"></span>
-            <a class="smallButton" href=#>Добавить</a>
+            <a class="small-button" href=#>Добавить</a>
         </section>
         <section>
             <h3>Выбранные авторы</h3>
             <ul class="authors">
-                <li><a href=#>Ann Akulich</a></li>
+                <li><a href=#>Davle</a></li>
             </ul>
         </section>
         <section>
@@ -119,6 +68,23 @@
     <a href="#">10</a>
     <a href="#">Вперёд</a>
 </div>
+<template id = "article-temp">
+    <div class = "article" data-id = "id">
+        <header>
+            <h2 class = "title">Название новости</h2>
+            <div class = "author">Автор:&nbsp;</div>
+            <div class = "date">Дата</div>
+            <div>Теги:&nbsp;<span class = "tags">Список тегов</span></div>
+        </header>
+
+        <p class = "summary">Содержание</p>
+        <a class="button" href="#">Подробнее</a>
+        <div class = "article-actions"></div>
+    </div>
+</template>
+<template id = "tag-temp">
+    <span class = "tag">Тег</span>
+</template>
 <footer class=clearfix>
     <p class=copyright>&copy; 2017 <strong>Новостной портал</strong>. Все права защищены. <strong>Акулич Анна
         .</strong> БГУ ФПМИ 2 курс 6 группа. E-mail: an12.na98@gmail.com</p>
