@@ -554,7 +554,6 @@ let articlesView = (function(){
         ARTICLE_TEMPLATE.content.querySelector(".summary").textContent = article.summary;
         ARTICLE_TEMPLATE.content.querySelector(".author").textContent += article.author;
         ARTICLE_TEMPLATE.content.querySelector(".date").textContent = formatDate(article.createdAt);
-        //ARTICLE_TEMPLATE.content.querySelector(".date").textContent = article.createdAt;
 
         TAGS_TEMPLATE = document.querySelector("#tag-temp");
         TAGS_LIST = ARTICLE_TEMPLATE.content.querySelector(".tags");
