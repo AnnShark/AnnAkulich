@@ -445,7 +445,7 @@ let articlesBlok = (function () {
         }
         if (FilterConfig != undefined && FilterConfig.tags != undefined ) {
             work = work.filter(function (f) {
-                return filterConfig.tags === FilterConfig.tags;
+                return FilterConfig.tags === FilterConfig.tags;
             });
         }
         work.sort(function (firstArticle, secondArticle) {
@@ -468,19 +468,19 @@ let articlesBlok = (function () {
         if(article.id === undefined ){
             return false;
         }
-        else if(article.title === undefined && article.title.length < 0 && article.title.length > 100)    {
+        else if(article.title === undefined || article.title.length < 0 || article.title.length > 100)    {
             return false;
         }
-        else if( article.summary === undefined && article.summary.length > 200 ){
+        else if( article.summary === undefined || article.summary.length > 200 ){
             return false;
         }
         else if(article.createdAt === undefined){
             return false;
         }
-        else if(article.author === undefined && article.author.length === 0){
+        else if(article.author === undefined || article.author.length === 0){
             return false;
         }
-        else if(article.content === undefined && article.content.length === 0 ){
+        else if(article.content === undefined || article.content.length === 0 ){
             return false;
         }
         else if (article.tags === undefined ){
@@ -500,7 +500,7 @@ let articlesBlok = (function () {
 
     function editArticle(id , article){
         for(var i =0 ; i < articles.length;i++){
-            if(validateArticle(article) == true){
+            if(validateArticle(article)){
                 if(articles[i].id === id){
                     articles[i].title = article.title;
                     articles[i].summary = article.summary;
@@ -515,9 +515,12 @@ let articlesBlok = (function () {
     function removeArticle(id){
         for (var i =0; i < articles.length;i++){
           if (articles[i] === id) {
-                 articles.splice(i, i);
+                 articles.splice(i, 1);
                  return true;
              }
+              else {
+                     return false;
+                   }
          }
     }
 
@@ -534,9 +537,12 @@ let articlesBlok = (function () {
 let articlesView = (function(){
     let ARTICLE_TEMPLATE ;
     let ARTICLE_LIST ;
+    let TAGS_TEMPLATE;
+    let TAGS_LIST;
     function init(){
         ARTICLE_TEMPLATE = document.querySelector("#article-temp");
         ARTICLE_LIST =  document.querySelector(".content");
+
     }
     function newAddArticles(articles) {
         makeArticles(articles).forEach(function (article) {
