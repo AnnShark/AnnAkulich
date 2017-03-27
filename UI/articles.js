@@ -1,34 +1,36 @@
-let user = null;
+'use strict';
 
-let articlesBlok = (function () {
+var user = null;
+
+var articlesBlok = (function () {
     let article1 ={
-    id:'1',
-    title:'Лайфхаки для каждого. Как экономить на интернет-покупках',
-    summary: 'Лайфхаки для каждого. Как экономить на интернет-покупках, не дожидаясь "черной пятницы',
+    id:"1",
+    title:"Лайфхаки для каждого. Как экономить на интернет-покупках",
+    summary: "Лайфхаки для каждого. Как экономить на интернет-покупках, не дожидаясь черной пятницы",
     createdAt: new Date (2017,2,26,15,1,0,0),
     author:"Davle",
     tags:["лайфхаки","экономить","черная пятница"],
-    content:'Интернет-шопинг становится все популярнее у белорусов. За прошлый год расходы на онлайн-покупки выросли на четверть. Не выходя из дома белорусы покупают практически все: от косметики и парфюмерии до стройматериалов. Чтобы сделать онлайн-шопинг еще более выгодным, мы подготовили несколько простых советов',
+    content:"Интернет-шопинг становится все популярнее у белорусов. За прошлый год расходы на онлайн-покупки выросли на четверть. Не выходя из дома белорусы покупают практически все: от косметики и парфюмерии до стройматериалов. Чтобы сделать онлайн-шопинг еще более выгодным, мы подготовили несколько простых советов",
     };
 
     let article2 ={
-    id:'2',
-    title:'Оскар-2017": лучший фильм — "Лунный свет". "Ла-Ла Ленд" объявили победителем ошибочно',
-    summary: 'Оскар-2017": лучший фильм — "Лунный свет". "Ла-Ла Ленд"',
+    id:"2",
+    title:"Оскар-2017: лучший фильм — Лунный свет. Ла-Ла Ленд объявили победителем ошибочно",
+    summary: "Оскар-2017: лучший фильм — Лунный свет. Ла-Ла Ленд",
     createdAt: new Date (2017,2,28,9,0,0,0),
     author:"Davle",
     tags:["Оскар","Лунный свет","Ла-Ла Ленд"],
-    content:'На конфузе в Лос-Анджелесе завершилась 89-я церемония награждения ежегодной премии «Оскар». Лучшим фильмом стал «Лунный свет», приз в номинации «Лучшая актриса» — за Эммой Стоун. Конфуз в том, что сперва академики вскрыли ошибочный конверт с названием «Ла-Ла Ленд»',
+    content:"На конфузе в Лос-Анджелесе завершилась 89-я церемония награждения ежегодной премии «Оскар». Лучшим фильмом стал «Лунный свет», приз в номинации «Лучшая актриса» — за Эммой Стоун. Конфуз в том, что сперва академики вскрыли ошибочный конверт с названием «Ла-Ла Ленд»",
     };
 
     let article3 ={
-    id:'3',
-    title:'"Газпром" повысит стоимость газа для Евросоюза',
-    summary: '"Газпром" повысит ',
+    id:"3",
+    title:"Газпром повысит стоимость газа для Евросоюза",
+    summary: "Газпром повысит ",
     createdAt: new Date (2017,2,27,13,0,0,0),
     author:"Davle",
     tags:["Газпром","газ","Евросоюз"],
-    content:'Экспортная стоимость газа для Евросоюза в текущем году может составить 180−190 долларов за тысячу кубометров.Об этом сообщил заместитель председателя правления «Газпрома» Александр Медведев, передает РИА "Новости".&hellip',
+    content:"Экспортная стоимость газа для Евросоюза в текущем году может составить 180−190 долларов за тысячу кубометров.Об этом сообщил заместитель председателя правления «Газпрома» Александр Медведев, передает РИА Новости.&hellip",
     };
     let article4 ={
      id: "4",
@@ -421,69 +423,80 @@ let articlesBlok = (function () {
             "предупреждает, чтобы руки были на руле, а внимание на дороге."
         };
 
-    let tags = ["лайфхаки","экономить","черная пятница","Оскар","Лунный свет","Ла-Ла Ленд","Газпром","газ","Евросоюз","социальные сети",
+    var tags = ["лайфхаки","экономить","черная пятница","Оскар","Лунный свет","Ла-Ла Ленд","Газпром","газ","Евросоюз","социальные сети",
      "тенденции","медицина", "технологии", "mwc", "sony", "Рубль", "финансы", "lenovo", "motorola", "курс валют", "тесла", "tesla",
      "авария", "автопилот", "автомобили", "расследование", "космос", "умные часы"];
 
-    let articles = [article1, article2, article3,article4,article5,article6,article7,article8,article9,article10,article11,article12,
+    var articles = [article1, article2, article3,article4,article5,article6,article7,article8,article9,article10,article11,article12,
     article13,article14,article15,article16,article17,article18,article19,article20];
     console.log(articles);
-
+var work = articles;
     function getArticles(skip,top,FilterConfig){
+    debugger;
         var work = articles;
         var begin  = skip || 0;
         var end = top || 20;
-        if(FilterConfig != undefined && FilterConfig.author != undefined){
+        if(FilterConfig){
+         if(FilterConfig.author){
+         debugger;
                work = articles.filter(function(f){
                     return f.author === FilterConfig.author;
             });
         }
-        if(FilterConfig != undefined && FilterConfig.createdAt != undefined){
+        if( FilterConfig.createdIn && FilterConfig.createOut){
             work = work.filter( function(f){
-                return f.createdAt === FilterConfig.createdAt
+                return FilterConfig.createdIn < f.createdAt && f.createdAt < FilterConfig.createdOut;
             });
         }
-        if (FilterConfig != undefined && FilterConfig.tags != undefined ) {
+        if (FilterConfig.tags && FilterConfig.tags[0] ) {
             work = work.filter(function (f) {
-                return FilterConfig.tags === FilterConfig.tags;
+                return f.tags.some(function(tag){
+                    return FilterConfig.tags.indexOf(tag) !== -1;
+                });
             });
         }
+    }
         work.sort(function (firstArticle, secondArticle) {
             return secondArticle.createdAt.getTime() - firstArticle.createdAt.getTime();
         });
 
-        return work.splice(begin,begin+end);
+        return work.slice(begin,begin+end);
     }
     function getArticle(id){
-        if( id != undefined){
+
+        if(id){
             for(var i = 0; i < articles.length; i++){
-                if(articles[i].id == id){
+                if(articles[i].id === id){
                     return articles[i];
                 }
             }
         }
     }
+     function getArticlesCount() {
+
+            return work.length;
+        }
 
     function validateArticle(article){
         if(article.id === undefined ){
             return false;
         }
-        else if(article.title === undefined || article.title.length < 0 || article.title.length > 100)    {
+        else if(!article.title || typeof(article.title) === "string"  || article.title.length < 0 || article.title.length > 100)    {
             return false;
         }
-        else if( article.summary === undefined || article.summary.length > 200 ){
+        else if(!article.summary || typeof(article.summary) === "string" || article.summary.length > 200 ){
             return false;
         }
-        else if(article.createdAt === undefined){
+        else if(!article.createdAt || article.createdAt instanceof Date){
             return false;
         }
-        else if(article.author === undefined || article.author.length === 0){
+        else if(!article.author || typeof(article.author) === "string" || article.author.length === 0){
             return false;
         }
-        else if(article.content === undefined || article.content.length === 0 ){
+        else if(!article.content || typeof(article.content) === "string" || article.content.length === 0 ){
             return false;
         }
-        else if (article.tags === undefined ){
+        else if (!article.tags){
             return false;
         }
         else {
@@ -515,7 +528,7 @@ let articlesBlok = (function () {
     function removeArticle(id){
         for (var i =0; i < articles.length;i++){
           if (articles[i] === id) {
-                 articles.splice(i, 1);
+                 articles.slice(i, 1);
                  return true;
              }
               else {
@@ -530,15 +543,17 @@ let articlesBlok = (function () {
           validateArticle: validateArticle,
           addArticle: addArticle,
           removeArticle: removeArticle,
-          editArticle: editArticle
+          editArticle: editArticle,
+          getArticlesCount:getArticlesCount
       };
   }()
 );
-let articlesView = (function(){
-    let ARTICLE_TEMPLATE ;
-    let ARTICLE_LIST ;
-    let TAGS_TEMPLATE;
-    let TAGS_LIST;
+
+var articlesView = (function(){
+    var ARTICLE_TEMPLATE ;
+    var ARTICLE_LIST ;
+    var TAGS_TEMPLATE;
+    var TAGS_LIST;
     function init(){
         ARTICLE_TEMPLATE = document.querySelector("#article-temp");
         ARTICLE_LIST =  document.querySelector(".content");
@@ -563,7 +578,7 @@ let articlesView = (function(){
 
         TAGS_TEMPLATE = document.querySelector("#tag-temp");
         TAGS_LIST = ARTICLE_TEMPLATE.content.querySelector(".tags");
-        let nodeTags = makeTags(article.tags);
+        var nodeTags = makeTags(article.tags);
         nodeTags.forEach(function (tag) {
             TAGS_LIST.appendChild(tag);
         });
@@ -597,15 +612,94 @@ let articlesView = (function(){
     };
 }());
 
+var pagination = (function () {
+    var TOTAL;
+    var PER_PAGE = 3;
+    var CURRENT_PAGE = 1;
+    var SHOW_MORE_BUTTON;
+    var SHOW_MORE_CALLBACK;
+
+
+    function init(total, showMoreCb) {
+        TOTAL = total;
+        SHOW_MORE_CALLBACK = showMoreCb;
+        SHOW_MORE_BUTTON = document.getElementsByClassName('paginator')[0];
+        SHOW_MORE_BUTTON.addEventListener('click', handleShowMoreClick)
+
+
+        if (getTotalPages() <= CURRENT_PAGE) {
+            hideShowMoreButton();
+        }
+
+
+        return getParams();
+    }
+
+    function handleShowMoreClick() {
+        var paginationParams = nextPage();
+        SHOW_MORE_CALLBACK(paginationParams.skip, paginationParams.top);
+    }
+
+    function getTotalPages() {
+        return Math.ceil(TOTAL / PER_PAGE);
+    }
+
+    function nextPage() {
+        CURRENT_PAGE++;
+        if (getTotalPages() <= CURRENT_PAGE) {
+            hideShowMoreButton();
+        }
+
+        return getParams();
+    }
+
+    function getParams() {
+        return {
+            top: PER_PAGE,
+            skip: (CURRENT_PAGE - 1) * PER_PAGE
+        };
+    }
+
+    function hideShowMoreButton() {
+        SHOW_MORE_BUTTON.hidden = true;
+    }
+
+    return {
+        init: init
+    }
+
+}());
+
+
 document.addEventListener('DOMContentLoaded', startApp);
 
 function startApp() {
     articlesView.init();
-    makeArticles(0,20, new Object());
+
+    var total = articlesBlok.getArticlesCount();
+        var paginationParams = pagination.init(total, makeArticles);
+        var content = document.getElementsByClassName('content')[0];
+        content.addEventListener('click',deligateClickEvent);
+        makeArticles(paginationParams.skip, paginationParams.top);
+}
+
+function deligateClickEvent(eventObj){
+    var classList = eventObj.target.classList;
+    if(eventObj.type === 'click' && classList.contains('button')){
+        readMore(eventObj);
+    }
+}
+function readMore(eventObj){
+    var news = eventObj.target.parentNode;
+    var id = news.getAttribute('data-id');
+    var article = articlesBlok.getArticle(id);
+    news.getElementsByClassName('summary')[0].textContent = article.content;
 }
 function makeArticles(skip,top,FilterConfig){
     articlesView.removeArticles();
+    debugger
     let articles = articlesBlok.getArticles(skip, top, FilterConfig);
+    debugger;
     articlesView.newAddArticles(articles);
 }
 
@@ -634,5 +728,17 @@ function makeButton() {
         USER_NAME.textContent = user;
         NAVIGATION_BUTTONS.querySelector(".login").textContent = "Выйти";
     }
+}
+function filterForm(){
+    debugger;
+    var form = document.forms['filter-form'];
+    var filter = {
+        author: form.author.value,
+        createdIn:new Date(form.dateIn.value),
+        createdOut:new Date(form.dateOut.value),
+        tags:form.tags.value.split(' ')
+    }
+        debugger;
+        makeArticles(0,4,filter);
 }
 
