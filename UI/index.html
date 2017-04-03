@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>News portal</title>
-    <script src ="articles.js"></script>
+    <script src="articles.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -17,10 +17,10 @@
         <h2>Актуальные новости</h2>
     </hgroup>
     <nav class="global">
-        <ul class = "buttons">
-            <li class = "buttons"><a href=#>Главная</a></li>
-            <li class = "buttons"><a href=#>Добавить/Редактировать новость</a></li>
-            <li class = "buttons"><a class="login"href=#>Выйти</a></li>
+        <ul class="buttons">
+            <li class="buttons"><a href=#>Главная</a></li>
+            <li class="buttons"><a href=#>Добавить/Редактировать новость</a></li>
+            <li class="buttons"><a class="login" href=#>Выйти</a></li>
         </ul>
     </nav>
 </header>
@@ -29,61 +29,58 @@
 
     </div>
     <aside>
-        <h2>Фильтры</h2>
-        <section class="date-filter">
-            <h3>Дата публикации</h3>
-            <span>c<input type="date"></span>
-            <span>по<input type="date"></span>
-        </section>
-        <section class="author-name-filter">
-            <h3>Имя автора</h3>
-            <span><input placeholder="Введите имя автора"></span>
-            <a class="small-button" href=#>Добавить</a>
-        </section>
-        <section class="tagsFilter">
-            <h3>Теги</h3>
-            <span><input placeholder="Введите тег"></span>
-            <a class="small-button" href=#>Добавить</a>
-        </section>
-        <section>
-            <h3>Выбранные авторы</h3>
-            <ul class="authors">
-                <li><a href=#>Davle</a></li>
-            </ul>
-        </section>
-        <section>
-            <h3>Выбранные теги</h3>
-            <ul class="tagsList">
-                <li><a class="tags" href=#>оскар</a></li>
-            </ul>
-        </section>
+        <form name = "filter-form">
+            <h2>Фильтры</h2>
+            <section class="date-filter">
+                <h3>Дата публикации</h3>
+            <span>c<input name = "dateIn" class="dateIn" type="date"></span>
+            <span>по<input name = "dateOut" class="dateOut" type="date"></span>
+            </section>
+            <section class="author-name-filter">
+                <h3>Имя автора</h3>
+                <span><input name = "author" placeholder="Введите имя автора"></span>
+            </section>
+            <section class="tagsFilter">
+                <h3>Теги</h3>
+                <span><input name = "tags" placeholder="Введите тег"></span>
+            </section>
+            <section>
+                <h3>Выбранные авторы</h3>
+                <ul class="authors">
+                    <li><a href=#>Davle</a></li>
+                </ul>
+            </section>
+            <section>
+                <h3>Выбранные теги</h3>
+                <ul class="tagsList">
+                    <li><a class="tags" href=#>оскар</a></li>
+                </ul>
+            </section>
+        </form>
+        <button onclick="filterForm()">Добавить</button>
+        <button onclick="clearFilterForm()">Сбросить</button>
     </aside>
 </div>
 <div class="paginator">
-    <a href="#">Назад</a>
-    <a href="#">1</a>
-    <a href="#">2</a>
-    <span>&hellip;</span>
-    <a href="#">9</a>
-    <a href="#">10</a>
-    <a href="#">Вперёд</a>
+    <button id="pagination-show-more">Показать ещё</button>
 </div>
-<template id = "article-temp">
-    <div class = "article" data-id = "id">
+<div style="margin-left:35%">Страница №<span id="page-number">1</span></div>
+<template id="article-temp">
+    <div class="article" data-id="id">
         <header>
-            <h2 class = "title">Название новости</h2>
-            <div class = "author">Автор:&nbsp;</div>
-            <div class = "date">Дата</div>
-            <div>Теги:&nbsp;<span class = "tags">Список тегов</span></div>
+            <h2 class="title">Название новости</h2>
+            <div>Автор:&nbsp;<span class="author"> </span></div>
+            <div class="date">Дата</div>
+            <div>Теги:&nbsp;<span class="tags">Список тегов</span></div>
         </header>
 
-        <p class = "summary">Содержание</p>
-        <a class="button" href="#">Подробнее</a>
-        <div class = "article-actions"></div>
+        <p class="summary">Содержание</p>
+        <a class="button" >Подробнее</a>
+        <div class="article-actions"></div>
     </div>
 </template>
-<template id = "tag-temp">
-    <span class = "tag">Тег</span>
+<template id="tag-temp">
+    <span class="tag">Тег</span>
 </template>
 <footer class=clearfix>
     <p class=copyright>&copy; 2017 <strong>Новостной портал</strong>. Все права защищены. <strong>Акулич Анна
