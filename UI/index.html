@@ -1,90 +1,183 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>News portal</title>
-    <script src="articles.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="/javascripts/articles.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
 </head>
 <body>
-<header>
-    <div class="user">
-        <div class="name"><p>Гость</p></div>
+    <header>
+        <div class="user">
+            <div><p class="name">Гость</p></div>
 
-    </div>
-    <hgroup>
-        <h1><a href=#>Новостной портал</a></h1>
-        <h2>Актуальные новости</h2>
-    </hgroup>
-    <nav class="global">
-        <ul class="buttons">
-            <li class="buttons"><a href=#>Главная</a></li>
-            <li class="buttons"><a href=#>Добавить/Редактировать новость</a></li>
-            <li class="buttons"><a class="login" href=#>Выйти</a></li>
-        </ul>
-    </nav>
-</header>
-<div class="clearfix">
-    <div class="content">
+        </div>
+        <hgroup>
+            <h1><a href=#>Новостной портал</a></h1>
+            <h2>Актуальные новости</h2>
+        </hgroup>
+        <nav class="global">
+            <ul class="buttons">
+            
+                <li class="buttons"onclick="clearFilterForm()"><a href=#>Главная</a></li>
+                 <li class="add"><a href=#>Добавить новость</a></li>
+                <li class="buttons"><a class="login" href=#>Войти</a></li>
+            </ul>
+            
+        </nav>
+    </header>
 
-    </div>
-    <aside>
-        <form name = "filter-form">
-            <h2>Фильтры</h2>
-            <section class="date-filter">
-                <h3>Дата публикации</h3>
-            <span>c<input name = "dateIn" class="dateIn" type="date"></span>
-            <span>по<input name = "dateOut" class="dateOut" type="date"></span>
-            </section>
-            <section class="author-name-filter">
-                <h3>Имя автора</h3>
-                <span><input name = "author" placeholder="Введите имя автора"></span>
-            </section>
-            <section class="tagsFilter">
-                <h3>Теги</h3>
-                <span><input name = "tags" placeholder="Введите тег"></span>
-            </section>
-            <section>
-                <h3>Выбранные авторы</h3>
-                <ul class="authors">
-                    <li><a href=#>Davle</a></li>
-                </ul>
-            </section>
-            <section>
-                <h3>Выбранные теги</h3>
-                <ul class="tagsList">
-                    <li><a class="tags" href=#>оскар</a></li>
-                </ul>
-            </section>
-        </form>
-        <button onclick="filterForm()">Добавить</button>
-        <button onclick="clearFilterForm()">Сбросить</button>
-    </aside>
-</div>
-<div class="paginator">
-    <button id="pagination-show-more">Показать ещё</button>
-</div>
-<div style="margin-left:35%">Страница №<span id="page-number">1</span></div>
-<template id="article-temp">
-    <div class="article" data-id="id">
-        <header>
-            <h2 class="title">Название новости</h2>
-            <div>Автор:&nbsp;<span class="author"> </span></div>
-            <div class="date">Дата</div>
-            <div>Теги:&nbsp;<span class="tags">Список тегов</span></div>
-        </header>
 
-        <p class="summary">Содержание</p>
-        <a class="button" >Подробнее</a>
-        <div class="article-actions"></div>
+    <div class="clearfix">
+        <div class="content">
+
+        </div>
+        <aside>
+            <form name = "filter-form">
+                <h2>Фильтры</h2>
+                <section class="date-filter">
+                    <h3>Дата публикации</h3>
+                <span>c<input name = "dateIn" class="dateIn" type="date"></span>
+                <span>по<input name = "dateOut" class="dateOut" type="date"></span>
+                </section>
+                <section class="author-name-filter">
+                    <h3>Имя автора</h3>
+                    <span><input name = "author" placeholder="Введите имя автора"></span>
+                    <a class="small-button" href=#>Добавить</a>
+                </section>
+                <section class="tagsFilter">
+                    <h3>Теги</h3>
+                    <span><input name = "tags" placeholder="Введите тег"></span>
+                    <a class="small-button" href=#>Добавить</a>
+                </section>
+                <section>
+                    <h3>Выбранные авторы</h3>
+                    <ul class="authors">
+                        <li><a href=#>Davle</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Выбранные теги</h3>
+                    <ul class="tagsList">
+                        <li><a class="tags" href=#>оскар</a></li>
+                    </ul>
+                </section>
+            </form>
+           
+            <button onclick="filterForm()">Добавить</button>
+            <button onclick="clearFilterForm()">Сбросить</button>
+        </aside>
     </div>
-</template>
-<template id="tag-temp">
-    <span class="tag">Тег</span>
-</template>
-<footer class=clearfix>
-    <p class=copyright>&copy; 2017 <strong>Новостной портал</strong>. Все права защищены. <strong>Акулич Анна
-        .</strong> БГУ ФПМИ 2 курс 6 группа. E-mail: an12.na98@gmail.com</p>
-</footer>
+
+
+    <div class="paginator">
+        <button id="pagination-show-more">Показать ещё</button>
+    </div>
+
+    <div style="margin-left:35%">Страница №<span id="page-number">1</span></div>
+   
+    <div class="login-form">
+        <label><b>Username</b></label>
+        <input type="text" class="name" placeholder="Enter Username" name="uname" required>
+
+        <label><b>Password</b></label>
+        <input type="password" class="password" placeholder="Enter Password" name="psw" required>
+
+        
+        <div>
+            <button type="submit" class="ok">Ok</button>
+            <button type="submit" class="cancel">Cancel</button>
+        </div>
+        <div><input type="checkbox" checked="checked">Remember me</div>
+    </div>
+
+    <div class="add-form">
+
+        <label><b>Id новости</b></label>
+        <input type="text" class="id" placeholder="Введите id новости" name="nid" required>
+
+        <label><b>Название новости</b></label>
+        <input type="text" class="title" placeholder="Введите название новости" name="uname" required>
+
+        <label><b>Автор новости</b></label>
+        <input type="text" class="author" placeholder="Введите автора новости" name="nauthor" required>
+
+       
+
+        <label><b>Краткое описание новости</b></label>
+        <input type="text" class="summary" placeholder="Введите краткое описание новости" name="nsummary" required>
+
+        <label><b>Теги</b></label>
+        <input type="text" class="tags" placeholder="Введите теги" name="ntag" required>
+
+        <label><b>Текст новости</b></label>
+        <input type="text" class="newscontent" placeholder="Введите текст новости" name="ncontent" required>
+
+        
+        <div>
+           
+              <button   type="submit" class="ok">Ok</button>
+            <button type="submit" class="cancel">Cancel</button>
+        </div>
+       
+    </div>
+     <div class="edit-form">
+
+        <label><b>Id новости</b></label>
+        <input type="text" class="id" placeholder="Введите id новости" name="nid" required>
+
+        <label><b>Название новости</b></label>
+        <input type="text" class="title" placeholder="Введите название новости" name="uname" required>
+
+        <label><b>Автор новости</b></label>
+        <input type="text" class="author" placeholder="Введите автора новости" name="nauthor" required>
+
+       
+
+        <label><b>Краткое описание новости</b></label>
+        <input type="text" class="summary" placeholder="Введите краткое описание новости" name="nsummary" required>
+
+        <label><b>Теги</b></label>
+        <input type="text" class="tags" placeholder="Введите теги" name="ntag" required>
+
+        <label><b>Текст новости</b></label>
+        <input type="text" class="newscontent" placeholder="Введите текст новости" name="ncontent" required>
+
+        
+        <div>
+            <button type="submit" class="editOk">Ok</button>
+            <button type="submit" class="editCancel">Cancel</button>
+        </div>
+       
+    </div>
+
+
+
+
+    <template id="article-temp">
+        <div class="article" data-id="id">
+            <header>
+                <h2 class="title">Название новости</h2>
+                <div>Автор:&nbsp;<span class="author"> </span></div>
+                <div class="date">Дата</div>
+                <div>Теги:&nbsp;<span class="tags">Список тегов</span></div>
+            </header>
+
+            <p class="summary">Содержание</p>
+            <a class="button" >Подробнее</a>
+            <center> <a  class="editArticleButton" >Редактировать</a> </center>
+            <a class="deleteArticleButton" > Удалить</a>         
+             <div class="article-actions"></div>
+        </div>
+    </template>
+    <template id="tag-temp">
+        <span class="tag">Тег</span>
+    </template>
+
+    <footer class=clearfix>
+        <p class=copyright>&copy; 2017 <strong>Новостной портал</strong>. Все права защищены. <strong>Акулич Анна
+            .</strong> БГУ ФПМИ 2 курс 6 группа. E-mail: an12.na98@gmail.com</p>
+    </footer>
+
 </body>
 </html>
