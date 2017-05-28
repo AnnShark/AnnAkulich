@@ -445,28 +445,76 @@ let articles = [article1, article2, article3, article4, article5, article6, arti
   article15, article16, article17, article18,
   article19, article20,
 ];
+
+
 let tags = ['лайфхаки', 'экономить', 'черная пятница', 'Оскар', 'Лунный свет', 'Ла-Ла Ленд', 'Газпром', 'газ', 'Евросоюз', 'социальные сети',
   'тенденции', 'медицина', 'технологии', 'mwc', 'sony', 'Рубль', 'финансы', 'lenovo', 'motorola', 'курс валют', 'тесла', 'tesla',
   'авария', 'автопилот', 'автомобили', 'расследование', 'космос', 'умные часы'];
+const users = [
+  {
+    username: 'admin',
+    password: 'admin',
+  },
+  {
+    username: 'Test',
+    password: 'Test',
+  },
+];
 
+let passport = require('passport');
+let LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+{ passReqToCallback: true },
+
+(req, username, password, done) => {
+  let user = users.find(user => username === user.username);
+
+  if (!user) return done(null, false);
+
+  if (user.password !== password) return done(null, user);
+
+  return done(null, user);
+},
+
+));
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+module.exports.passport = passport;
+
+let controller = require('../private/controller/article-controller');
 
 router.get('/articles', (req, res, next) => {
-  res.send(JSON.stringify(articles));
+  controller.getArticles({}).exec((articles) => {
+    res.send(articles);
+  });
 });
+
 router.get('/tags', (req, res, next) => {
   res.send(JSON.stringify(tags));
+});
+router.get('/users', (req, res, next) => {
+  res.send(JSON.stringify(users));
 });
 
 
 router.put('/putArticle', (req, res, next) => {
-  console.log(req.body);
-  let article = req.body;
-  article.createdAt = new Date(article.createdAt);
-  if (validateArticle(article)) {
-    articles.push(article);
-  }
-  console.log(article);
-  res.send(JSON.stringify(articles));
+  controller.addArticle(req.body).then(() => {
+    controller.getArticles().exec((articles) => {
+      res.send(articles);
+    });
+  });
+});
+
+router.post('/postUsers', passport.authenticate('local'), (req, res, next) => {
+  res.send({ status: 'ok' });
 });
 
 router.post('/postArticle', (req, res, next) => {
@@ -484,18 +532,18 @@ router.post('/postArticle', (req, res, next) => {
       }
     }
   }
+  
   res.send(JSON.stringify(articles));
 });
 
 router.delete('/deleteArticle', (req, res, next) => {
   let id = req.body.id;
-  for (let i = 0; i < articles.length; i++) {
-    if (articles[i].id === id) {
-      articles.splice(i, 1);
-    }
-  }
-  res.send(JSON.stringify(articles));
+  controller.delete({ id }).then(() => {
+    controller.getArticles().exec((articles) => {
+      res.send({ status: 'ok' });
+    });
+  });
 });
 
 
-module.exports = router;
+module.exports.router = router;
