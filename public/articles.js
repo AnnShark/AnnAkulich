@@ -1,5 +1,4 @@
-﻿
-let user = null;
+﻿let user = JSON.parse(localStorage.getItem('user'));
 let newAddArticle = null;
 let login = false;
 let work;
@@ -7,6 +6,16 @@ let articles;
 let xhr;
 let method;
 let url;
+let users = [
+  {
+    username: 'admin',
+    password: 'admin',
+  },
+  {
+    username: 'Test',
+    password: 'Test',
+  },
+];
 
 const articlesBlok = (function () {
   let tags;
@@ -53,6 +62,39 @@ const articlesBlok = (function () {
 
   function updateLocalStorage() {
     localStorage.setItem('articles', JSON.stringify(articles));
+  }
+
+  function getUsers() {
+    return new Promise((resolve, reject) => {
+      xhr.open('GET', '/users/users', true);
+      xhr.send();
+      xhr.onload = function () {
+        if (xhr.status !== 200) {
+          reject();
+        } else {
+          users = JSON.parse(xhr.responseText);
+        
+          resolve(users);
+        }
+      };
+    });
+  }
+  
+  function pushUser(userInfo) {
+    return new Promise((resolve, reject) => {
+      console.log(userInfo);
+
+      let xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://localhost:3000/users/postUsers', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify(userInfo));
+      xhr.onload = function () {
+        console.log('lalalal');
+        console.log(xhr.responseText);
+        if (!xhr.responseText) return resolve(undefined);
+        resolve(JSON.parse(xhr.responseText));
+      };
+    });
   }
 
   function getArticles(skip, top, FilterConfig) {
@@ -111,7 +153,6 @@ const articlesBlok = (function () {
     console.log(123);
     return true;
   }
-
   function addArticle(article) {
     return new Promise((resolve, reject) => {
       articles.push(article);
@@ -181,8 +222,11 @@ const articlesBlok = (function () {
     clearAtriclesFilter,
     updateLocalStorage,
     getArticlesFromServer,
+    pushUser,
+    getUsers,
   };
 }());
+
 const articlesView = (function () {
   let ARTICLE_TEMPLATE;
   let ARTICLE_LIST;
@@ -399,22 +443,28 @@ function startApp() {
     document.querySelector('.login-form .cancel').addEventListener('click', () => {
       document.querySelector('.login-form').style.visibility = 'hidden';
     });
-
+    
     document.querySelector('.login-form .ok').addEventListener('click', () => {
-      user = {
-        name: '',
-        password: '',
-      };
+      let user = {};
+
+      user.username = document.querySelector('.login-form .name').value;
       user.password = document.querySelector('.login-form .password').value;
-      user.name = document.querySelector('.login-form .name').value;
-      document.querySelector('.user .name').textContent = user.name;
-      login = true;
-      document.querySelector('.global .add').style.visibility = 'visible';
 
-      createNewsButton();
-      document.querySelector('.login-form').style.visibility = 'hidden';
+      console.log(user);
+
+      articlesBlok.pushUser(user).then((user) => {
+        console.log(user);
+
+        document.querySelector('.user .name').textContent = user.username;
+        login = true;
+
+        document.querySelector('.global .add').style.visibility = 'visible';
+
+        createNewsButton();
+        document.querySelector('.login-form').style.visibility = 'hidden';
+      });
     });
-
+    
 
     document.querySelector('.add').addEventListener('click', () => {
       document.querySelector('.add-form').style.visibility = 'visible';
